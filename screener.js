@@ -5,6 +5,11 @@
   'use strict';
 
   var rowsByCode = {};
+  var currentMarket = 'au';
+  var MARKET = {
+    au: { file: 'screener-data-au.json', title: 'ASX Value Screener' },
+    us: { file: 'screener-data-us.json', title: 'S&P 500 Value Screener' }
+  };
 
   function fmtMoney(v) {
     return v == null ? '—' : '$' + Number(v).toLocaleString('en-AU', {
@@ -32,12 +37,32 @@
     return { text: text, cls: cls, title: 'Financials as of ' + isoDate };
   }
 
-  document.addEventListener('DOMContentLoaded', loadScreener);
+  document.addEventListener('DOMContentLoaded', function () {
+    // wire the AU/US market toggle
+    document.querySelectorAll('.mkt-btn').forEach(function (b) {
+      b.addEventListener('click', function () { switchMarket(b.getAttribute('data-market')); });
+    });
+    loadScreener();
+  });
+
+  function switchMarket(mkt) {
+    if (mkt === currentMarket || !MARKET[mkt]) return;
+    currentMarket = mkt;
+    document.querySelectorAll('.mkt-btn').forEach(function (b) {
+      var on = b.getAttribute('data-market') === mkt;
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    var title = document.getElementById('screener-title');
+    if (title) title.textContent = MARKET[mkt].title;
+    loadScreener();
+  }
 
   function loadScreener() {
     var body = document.getElementById('screener-body');
     if (!body) return;
-    fetch('screener-data.json', { cache: 'no-store' })
+    body.innerHTML = '<tr><td colspan="7" class="screener__empty">Loading…</td></tr>';
+    fetch(MARKET[currentMarket].file, { cache: 'no-store' })
       .then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.json();

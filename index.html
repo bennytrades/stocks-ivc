@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="styles.css?v=5">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 
@@ -174,7 +174,11 @@
           <span class="ico">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><rect x="7" y="11" width="3" height="6"></rect><rect x="12" y="7" width="3" height="10"></rect><rect x="17" y="13" width="3" height="4"></rect></svg>
           </span>
-          <h2>ASX Value Screener</h2>
+          <div class="market-toggle" role="tablist" aria-label="Market">
+            <button class="mkt-btn is-active" data-market="au" role="tab" aria-selected="true" type="button">AU</button>
+            <button class="mkt-btn" data-market="us" role="tab" aria-selected="false" type="button">US</button>
+          </div>
+          <h2 id="screener-title">ASX Value Screener</h2>
           <span class="sub" id="screener-meta">loading…</span>
         </div>
 
@@ -218,8 +222,8 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
-  <script src="app.js?v=4"></script>
-  <script src="screener.js?v=4"></script>
+  <script src="app.js?v=5"></script>
+  <script src="screener.js?v=5"></script>
 </body>
 
 </html>
