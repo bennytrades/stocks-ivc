@@ -15,6 +15,23 @@
     return v == null ? '—' : (v * 100).toFixed(1) + '%';
   }
 
+  // Relative age of the data, from the financial-statement period end.
+  // Adapts: days -> weeks -> months. Flags staleness with a colour class.
+  function relativeAge(isoDate) {
+    if (!isoDate) return { text: '—', cls: '', title: 'No report date' };
+    var then = new Date(isoDate + 'T00:00:00');
+    if (isNaN(then)) return { text: '—', cls: '', title: 'No report date' };
+    var days = Math.floor((Date.now() - then) / 86400000);
+    if (days < 0) days = 0;
+    var text;
+    if (days < 14) text = days + 'd ago';
+    else if (days < 70) text = Math.round(days / 7) + 'w ago';
+    else text = Math.round(days / 30.44) + 'mo ago';
+    var months = days / 30.44;
+    var cls = months > 15 ? 'age--stale' : (months > 9 ? 'age--mid' : 'age--fresh');
+    return { text: text, cls: cls, title: 'Financials as of ' + isoDate };
+  }
+
   document.addEventListener('DOMContentLoaded', loadScreener);
 
   function loadScreener() {
@@ -28,7 +45,7 @@
       .then(render)
       .catch(function (err) {
         body.innerHTML =
-          '<tr><td colspan="6" class="screener__empty">Couldn\'t load screener data (' +
+          '<tr><td colspan="5" class="screener__empty">Couldn\'t load screener data (' +
           String(err.message) + '). Re-run the scanner\'s <code>export</code>.</td></tr>';
       });
   }
@@ -45,7 +62,7 @@
     }
 
     if (!rows.length) {
-      body.innerHTML = '<tr><td colspan="6" class="screener__empty">No valued stocks yet.</td></tr>';
+      body.innerHTML = '<tr><td colspan="5" class="screener__empty">No valued stocks yet.</td></tr>';
       return;
     }
 
@@ -54,15 +71,15 @@
       rowsByCode[r.code] = r;
       var marginCls = (r.margin != null && r.margin >= 0) ? 'up' : 'down';
       var confCls = r.confidence === 'high' ? 'conf-badge--high' : 'conf-badge--low';
+      var age = relativeAge(r.financials_as_of);
       var signal = r.is_buy
         ? '<span class="signal signal--buy">BUY</span>'
         : '<span class="signal signal--hold">hold</span>';
       return '<tr class="srow ' + (r.is_buy ? 'is-buy' : '') + '" data-code="' + r.code +
         '" tabindex="0" role="button" title="Load ' + r.code + ' into the calculator">' +
         '<td class="screener__code">' + r.code + '</td>' +
-        '<td class="num">' + fmtMoney(r.price) + '</td>' +
-        '<td class="num">' + fmtMoney(r.intrinsic) + '</td>' +
         '<td class="num ' + marginCls + '">' + fmtPct(r.margin) + '</td>' +
+        '<td class="age ' + age.cls + '" title="' + age.title + '">' + age.text + '</td>' +
         '<td><span class="conf-badge ' + confCls + '">' + (r.confidence || '').toUpperCase() + '</span></td>' +
         '<td>' + signal + '</td>' +
         '</tr>';
@@ -97,7 +114,9 @@
 
     // update the calculator's "loaded stock" banner
     set('loaded-code', stock.code);
-    set('loaded-name', (stock.name || '') + (stock.industry ? ' · ' + stock.industry : ''));
+    var age = relativeAge(stock.financials_as_of);
+    var asOf = stock.financials_as_of ? ' · financials ' + age.text : '';
+    set('loaded-name', (stock.name || '') + (stock.industry ? ' · ' + stock.industry : '') + asOf);
     var hint = document.getElementById('loaded-hint');
     if (hint) {
       hint.className = 'loaded__hint loaded__hint--' + (stock.confidence || 'low');

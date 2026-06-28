@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28T12:54:07+00:00",
+  "generated_at": "2026-06-28T13:04:58+00:00",
   "count": 12,
   "results": [
     {
@@ -12,7 +12,8 @@
       "confidence": "low",
       "is_buy": true,
       "source": "yfinance",
-      "fetched_at": "2026-06-28T12:24:36+00:00",
+      "fetched_at": "2026-06-28T13:03:52+00:00",
+      "financials_as_of": "2025-06-30",
       "inputs": {
         "annual_dividends": 1434.0,
         "franking_percentage": 100.0,
@@ -37,7 +38,8 @@
       "confidence": "high",
       "is_buy": true,
       "source": "annual-report",
-      "fetched_at": "2026-06-28T12:37:40+00:00",
+      "fetched_at": "2026-06-28T13:04:26+00:00",
+      "financials_as_of": "2025-06-30",
       "inputs": {
         "annual_dividends": 385.9,
         "franking_percentage": 100.0,
@@ -62,7 +64,8 @@
       "confidence": "low",
       "is_buy": true,
       "source": "yfinance",
-      "fetched_at": "2026-06-28T12:24:45+00:00",
+      "fetched_at": "2026-06-28T13:03:55+00:00",
+      "financials_as_of": "2025-06-30",
       "inputs": {
         "annual_dividends": 2851.0,
         "franking_percentage": 100.0,
@@ -87,7 +90,8 @@
       "confidence": "high",
       "is_buy": true,
       "source": "annual-report",
-      "fetched_at": "2026-06-28T12:37:40+00:00",
+      "fetched_at": "2026-06-28T13:04:27+00:00",
+      "financials_as_of": "2025-06-30",
       "inputs": {
         "annual_dividends": 1362.0,
         "franking_percentage": 100.0,
@@ -112,7 +116,8 @@
       "confidence": "low",
       "is_buy": false,
       "source": "yfinance",
-      "fetched_at": "2026-06-28T12:24:39+00:00",
+      "fetched_at": "2026-06-28T13:03:58+00:00",
+      "financials_as_of": "2024-09-30",
       "inputs": {
         "annual_dividends": 5652.0,
         "franking_percentage": 100.0,
@@ -137,7 +142,8 @@
       "confidence": "high",
       "is_buy": false,
       "source": "annual-report",
-      "fetched_at": "2026-06-28T12:37:40+00:00",
+      "fetched_at": "2026-06-28T13:04:27+00:00",
+      "financials_as_of": "2025-12-31",
       "inputs": {
         "annual_dividends": 6145.0,
         "franking_percentage": 100.0,
@@ -162,7 +168,8 @@
       "confidence": "high",
       "is_buy": false,
       "source": "annual-report",
-      "fetched_at": "2026-06-28T12:37:41+00:00",
+      "fetched_at": "2026-06-28T13:04:27+00:00",
+      "financials_as_of": "2026-03-31",
       "inputs": {
         "annual_dividends": 2350.0,
         "franking_percentage": 35.0,
@@ -187,7 +194,8 @@
       "confidence": "high",
       "is_buy": false,
       "source": "annual-report",
-      "fetched_at": "2026-06-28T12:37:40+00:00",
+      "fetched_at": "2026-06-28T13:04:26+00:00",
+      "financials_as_of": "2025-06-30",
       "inputs": {
         "annual_dividends": 889.0,
         "franking_percentage": 100.0,
@@ -212,7 +220,8 @@
       "confidence": "low",
       "is_buy": false,
       "source": "yfinance",
-      "fetched_at": "2026-06-28T12:24:38+00:00",
+      "fetched_at": "2026-06-28T13:04:04+00:00",
+      "financials_as_of": "2025-06-30",
       "inputs": {
         "annual_dividends": 2291.0,
         "franking_percentage": 100.0,
@@ -228,6 +237,32 @@
       }
     },
     {
+      "code": "CBA",
+      "name": "COMMONWEALTH BANK OF AUSTRALIA.",
+      "industry": "Banks",
+      "price": 162.02,
+      "intrinsic": 113.08,
+      "margin": -0.4327,
+      "confidence": "low",
+      "is_buy": false,
+      "source": "yfinance",
+      "fetched_at": "2026-06-28T13:04:07+00:00",
+      "financials_as_of": "2025-06-30",
+      "inputs": {
+        "annual_dividends": 7949.0,
+        "franking_percentage": 100.0,
+        "retained_earnings": 2167.0,
+        "change_in_reserves": 0.0,
+        "abnormals": 0.0,
+        "opening_equity": 73088.0,
+        "new_net_ordinary_equity": 154.0,
+        "required_return": 9.0,
+        "closing_equity": 78776.0,
+        "outstanding_shares": 1672123722.0,
+        "current_share_price": 162.02
+      }
+    },
+    {
       "code": "BHP",
       "name": "BHP GROUP LIMITED",
       "industry": "Materials",
@@ -237,7 +272,8 @@
       "confidence": "low",
       "is_buy": false,
       "source": "yfinance",
-      "fetched_at": "2026-06-28T12:24:34+00:00",
+      "fetched_at": "2026-06-28T13:04:05+00:00",
+      "financials_as_of": "2025-06-30",
       "inputs": {
         "annual_dividends": 6403.0,
         "franking_percentage": 100.0,
@@ -253,31 +289,6 @@
       }
     },
     {
-      "code": "CBA",
-      "name": "COMMONWEALTH BANK OF AUSTRALIA.",
-      "industry": "Banks",
-      "price": 162.02,
-      "intrinsic": 100.78,
-      "margin": -0.6076,
-      "confidence": "high",
-      "is_buy": false,
-      "source": "annual-report",
-      "fetched_at": "2026-06-28T12:34:48+00:00",
-      "inputs": {
-        "annual_dividends": 7949.0,
-        "franking_percentage": 70.0,
-        "retained_earnings": 2167.0,
-        "change_in_reserves": 0.0,
-        "abnormals": 0.0,
-        "opening_equity": 73088.0,
-        "new_net_ordinary_equity": 154.0,
-        "required_return": 9.0,
-        "closing_equity": 78776.0,
-        "outstanding_shares": 1672123722.0,
-        "current_share_price": 162.02
-      }
-    },
-    {
       "code": "TLS",
       "name": "TELSTRA GROUP LIMITED",
       "industry": "Telecommunication Services",
@@ -287,7 +298,8 @@
       "confidence": "low",
       "is_buy": false,
       "source": "yfinance",
-      "fetched_at": "2026-06-28T12:24:44+00:00",
+      "fetched_at": "2026-06-28T13:04:08+00:00",
+      "financials_as_of": "2025-06-30",
       "inputs": {
         "annual_dividends": 2317.0,
         "franking_percentage": 100.0,

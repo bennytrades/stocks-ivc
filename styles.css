@@ -565,6 +565,10 @@ table.screener tbody tr.is-buy td {
 }
 table.screener tbody tr.is-buy:hover td { background: rgba(22, 224, 139, 0.2); }
 .screener__code { font-family: var(--mono); font-weight: 700; letter-spacing: 0.3px; }
+td.age { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
+td.age--fresh { color: var(--fg-muted); }
+td.age--mid { color: var(--gold); }
+td.age--stale { color: var(--down); font-weight: 600; }
 .screener__name { color: var(--fg-muted); max-width: 280px; }
 table.screener td.up { color: var(--up); font-weight: 600; }
 table.screener td.down { color: var(--down); font-weight: 600; }
