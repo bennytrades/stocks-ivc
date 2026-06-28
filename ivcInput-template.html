@@ -1,12 +1,10 @@
-<div class="form-group" ng-class="{'has-error': isError()}">
-  <label for="{{theId}}" class="col-sm-5 control-label">{{ivcConfig.title}}</label>
-  <div class="input-group">
-    <div class="input-group-addon" ng-if="ivcConfig.unitsPrefix">{{ivcConfig.unitsPrefix}}</div>
-    <input type="number" class="form-control" id="{{theId}}" ng-model="ivcModel" ng-change="ivcConfig.callback()">
-    <div class="input-group-addon" ng-if="ivcConfig.unitsSuffix">{{ivcConfig.unitsSuffix}}</div>
+<div class="field" ng-class="{'has-error': isError()}">
+  <label class="field__label" for="{{theId}}">{{ivcConfig.title}}</label>
+  <div class="field__group">
+    <span class="field__addon field__addon--prefix" ng-if="ivcConfig.unitsPrefix">{{ivcConfig.unitsPrefix}}</span>
+    <input type="number" id="{{theId}}" ng-model="ivcModel" ng-change="ivcConfig.callback()" inputmode="decimal">
+    <span class="field__addon field__addon--suffix" ng-if="ivcConfig.unitsSuffix">{{ivcConfig.unitsSuffix}}</span>
   </div>
-  <span id="helpBlock" class="help-block col-sm-offset-5">{{ivcConfig.tip}}</span>
-  <span id="helpBlock" class="help-block col-sm-offset-5 bg-danger" ng-show="isError()">
-    <strong>{{errorMessage}}</strong>
-  </span>
+  <span class="field__tip">{{ivcConfig.tip}}</span>
+  <span class="field__error" ng-show="isError()"><strong>{{errorMessage}}</strong></span>
 </div>

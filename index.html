@@ -4,159 +4,166 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Intrinsic value calculator for stocks</title>
+  <title>Intrinsic Value Calculator · Stock Terminal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <meta name="description" content="A dark, trading-terminal styled intrinsic value calculator for stocks — estimate fair value and your margin of safety.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="styles.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 
 <body ng-app="ivc">
-  <div class="jumbotron">
-    <div class="container">
-      <h1>Intrinsic Value Calculator for stocks</h1>
-      <p>An online calculator version of the excellent guide written by <a href="http://www.clime.com.au/articles/demystifying-intrinsic-value-step-by-step/">clime</a>.</p>
-      <p>
-        I've written a guide on how to find the required data:
-        <a href="https://github.com/tomsaleeba/stocks-ivc/blob/master/finding-the-data/README.md" target="_blank" class="btn btn-lg btn-success">
-          <span class="glyphicon glyphicon-question-sign"></span>
-          Finding the required data
-        </a>
-      </p>
-      <p><small>
-        Got feedback? I'd love to hear it.
-        <a href="https://www.surveymonkey.com/r/C5ZWLNF" target="_blank" class="btn btn-info">
-          <span class="glyphicon glyphicon-bullhorn"></span>
-          Give feedback
-        </a>
-        </small>
-      </p>
-      <p><small>Disclaimer: This calculator has no brain, you need to use yours.</small></p>
+
+  <!-- Animated ticker tape -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span class="ticker__item"><span class="ticker__sym">ASX:CBA</span> 168.42 <span class="up">▲ 1.24%</span></span>
+      <span class="ticker__item"><span class="ticker__sym">ASX:BHP</span> 39.81 <span class="down">▼ 0.62%</span></span>
+      <span class="ticker__item"><span class="ticker__sym">NDQ:AAPL</span> 226.05 <span class="up">▲ 0.88%</span></span>
+      <span class="ticker__item"><span class="ticker__sym">ASX:CSL</span> 284.10 <span class="up">▲ 2.07%</span></span>
+      <span class="ticker__item"><span class="ticker__sym">NYSE:BRK.B</span> 462.33 <span class="down">▼ 0.31%</span></span>
+      <span class="ticker__item"><span class="ticker__sym">ASX:WES</span> 71.96 <span class="up">▲ 0.54%</span></span>
+      <span class="ticker__item"><span class="ticker__sym">NDQ:MSFT</span> 442.18 <span class="up">▲ 1.11%</span></span>
+      <span class="ticker__item"><span class="ticker__sym">ASX:WBC</span> 27.44 <span class="down">▼ 0.45%</span></span>
+      <!-- duplicate set for seamless loop -->
+      <span class="ticker__item"><span class="ticker__sym">ASX:CBA</span> 168.42 <span class="up">▲ 1.24%</span></span>
+      <span class="ticker__item"><span class="ticker__sym">ASX:BHP</span> 39.81 <span class="down">▼ 0.62%</span></span>
+      <span class="ticker__item"><span class="ticker__sym">NDQ:AAPL</span> 226.05 <span class="up">▲ 0.88%</span></span>
+      <span class="ticker__item"><span class="ticker__sym">ASX:CSL</span> 284.10 <span class="up">▲ 2.07%</span></span>
+      <span class="ticker__item"><span class="ticker__sym">NYSE:BRK.B</span> 462.33 <span class="down">▼ 0.31%</span></span>
+      <span class="ticker__item"><span class="ticker__sym">ASX:WES</span> 71.96 <span class="up">▲ 0.54%</span></span>
+      <span class="ticker__item"><span class="ticker__sym">NDQ:MSFT</span> 442.18 <span class="up">▲ 1.11%</span></span>
+      <span class="ticker__item"><span class="ticker__sym">ASX:WBC</span> 27.44 <span class="down">▼ 0.45%</span></span>
     </div>
   </div>
 
-  <div class="container" ng-controller="TheController">
-    <div class="row">
-      <div class="col-md-6">
-        <h2>Inputs</h2>
-        <form class="form-horizontal">
-          <ivc-input ivc-model="annualDividends" ivc-config="annualDividendsConfig"></ivc-input>
-          <ivc-input ivc-model="frankingPercentage" ivc-config="frankingPercentageConfig"></ivc-input>
-          <ivc-input ivc-model="retainedEarnings" ivc-config="retainedEarningsConfig"></ivc-input>
-          <ivc-input ivc-model="changeInReserves" ivc-config="changeInReservesConfig"></ivc-input>
-          <ivc-input ivc-model="abnormals" ivc-config="abnormalsConfig"></ivc-input>
-          <ivc-input ivc-model="openingEquity" ivc-config="openingEquityConfig"></ivc-input>
-          <ivc-input ivc-model="newNetOrdinaryEquity" ivc-config="newNetOrdinaryEquityConfig"></ivc-input>
-          <ivc-input ivc-model="requiredReturn" ivc-config="requiredReturnConfig"></ivc-input>
-          <ivc-input ivc-model="closingEquity" ivc-config="closingEquityConfig"></ivc-input>
-          <ivc-input ivc-model="outstandingShares" ivc-config="outstandingSharesConfig"></ivc-input>
-          <ivc-input ivc-model="currentSharePrice" ivc-config="currentSharePriceConfig"></ivc-input>
-          <ivc-input ivc-model="purchasedPrice" ivc-config="purchasedPriceConfig"></ivc-input>
-        </form>
+  <div class="wrap">
+
+    <!-- Hero -->
+    <header class="hero">
+      <span class="badge"><span class="dot"></span> Value Investing · Terminal</span>
+      <h1>Intrinsic Value <span class="accent">Calculator</span></h1>
+      <p class="lead">
+        Estimate a stock's fair value and your margin of safety — an online build of the excellent
+        method from <a href="http://www.clime.com.au/articles/demystifying-intrinsic-value-step-by-step/" target="_blank" rel="noopener">Clime's step-by-step guide</a>.
+      </p>
+      <div class="actions">
+        <a class="btn btn--primary" href="https://github.com/tomsaleeba/stocks-ivc/blob/master/finding-the-data/README.md" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          Finding the required data
+        </a>
+        <a class="btn" href="https://www.surveymonkey.com/r/C5ZWLNF" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"></path><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path></svg>
+          Give feedback
+        </a>
       </div>
-      <div class="col-md-6">
-        <h2>Working</h2>
-        <table class="table table-striped">
-          <tbody>
-            <tr>
-              <th>Grossed-up dividends</th>
-              <td>M${{grossedUpDivs | number:2}}</td>
-            </tr>
-            <tr>
-              <th>Normalised earnings</th>
-              <td>M${{normalisedEarnings | number:2}}</td>
-            </tr>
-            <tr>
-              <th>Net return on equity (NROE)</th>
-              <td>{{nroe * 100 | number:2}}%</td>
-            </tr>
-            <tr>
-              <th>Payout ratio</th>
-              <td>{{payoutRatio | number:4}}</td>
-            </tr>
-            <tr>
-              <th>Payout ratio (percentage)</th>
-              <td>{{payoutRatioPercentage | number:2}}%</td>
-            </tr>
-            <tr>
-              <th>Bond component</th>
-              <td>{{bondComponent | number:2}}</td>
-            </tr>
-            <tr>
-              <th>Growth component</th>
-              <td>{{growthComponent | number:2}}</td>
-            </tr>
-            <tr>
-              <th>Adjusted bond component</th>
-              <td>{{adjustedBondComponent | number:2}}</td>
-            </tr>
-            <tr>
-              <th>Adjusted growth component</th>
-              <td>{{adjustedGrowthComponent | number:2}}</td>
-            </tr>
-            <tr>
-              <th>Equity multiplier</th>
-              <td>{{equityMultiplier | number:2}}</td>
-            </tr>
-            <tr>
-              <th>Equity per share</th>
-              <td>${{equityPerShare | number:2}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="result-container">
-          <h2>Results</h2>
-          <table class="table table-striped">
-            <tbody>
-              <tr class="main-value">
-                <th>Intrinsic value</th>
-                <td ng-show="isInputValid()">${{intrinsicValue | number:2}}</td>
-                <td ng-hide="isInputValid()">$-.--</td>
-              </tr>
-              <tr>
-                <th>Current margin of safety</th>
-                <td ng-show="isInputValid()"
-                    ng-class="{'good-result': isCurrentMarginOfSafetyPositive, 'bad-result': !isCurrentMarginOfSafetyPositive}">
-                  {{currentMarginOfSafety * 100 | number:2}}%
-                </td>
-                <td ng-hide="isInputValid()">--%</td>
-              </tr>
-              <tr>
-                <th>Purchased margin of safety</th>
-                <td ng-show="isInputValid()"
-                    ng-class="{'good-result': isPurchasedMarginOfSafetyPositive, 'bad-result': !isPurchasedMarginOfSafetyPositive}">
-                  {{purchasedMarginOfSafety * 100 | number:2}}%
-                </td>
-                <td ng-hide="isInputValid()">--%</td>
-              </tr>
-            </tbody>
-          </table>
+      <p class="disclaimer">// Disclaimer: this calculator has no brain. You need to use yours.</p>
+    </header>
+
+    <!-- App -->
+    <main class="grid" ng-controller="TheController">
+
+      <!-- Inputs -->
+      <section>
+        <div class="panel">
+          <div class="panel__head">
+            <span class="ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+            </span>
+            <h2>Inputs</h2>
+            <span class="sub">From the annual report</span>
+          </div>
+          <form novalidate>
+            <ivc-input ivc-model="annualDividends" ivc-config="annualDividendsConfig"></ivc-input>
+            <ivc-input ivc-model="frankingPercentage" ivc-config="frankingPercentageConfig"></ivc-input>
+            <ivc-input ivc-model="retainedEarnings" ivc-config="retainedEarningsConfig"></ivc-input>
+            <ivc-input ivc-model="changeInReserves" ivc-config="changeInReservesConfig"></ivc-input>
+            <ivc-input ivc-model="abnormals" ivc-config="abnormalsConfig"></ivc-input>
+            <ivc-input ivc-model="openingEquity" ivc-config="openingEquityConfig"></ivc-input>
+            <ivc-input ivc-model="newNetOrdinaryEquity" ivc-config="newNetOrdinaryEquityConfig"></ivc-input>
+            <ivc-input ivc-model="requiredReturn" ivc-config="requiredReturnConfig"></ivc-input>
+            <ivc-input ivc-model="closingEquity" ivc-config="closingEquityConfig"></ivc-input>
+            <ivc-input ivc-model="outstandingShares" ivc-config="outstandingSharesConfig"></ivc-input>
+            <ivc-input ivc-model="currentSharePrice" ivc-config="currentSharePriceConfig"></ivc-input>
+            <ivc-input ivc-model="purchasedPrice" ivc-config="purchasedPriceConfig"></ivc-input>
+          </form>
         </div>
-        <!-- <p>TODO add result chart</p> -->
-      </div>
-    </div>
+      </section>
 
-    <hr>
+      <!-- Working + Results -->
+      <section>
+        <div class="panel">
+          <div class="panel__head">
+            <span class="ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 15l3-4 3 2 5-7"></path></svg>
+            </span>
+            <h2>Working</h2>
+            <span class="sub">Live</span>
+          </div>
+          <dl class="dl">
+            <div class="dl__row"><dt>Grossed-up dividends</dt><dd>M${{grossedUpDivs | number:2}}</dd></div>
+            <div class="dl__row"><dt>Normalised earnings</dt><dd>M${{normalisedEarnings | number:2}}</dd></div>
+            <div class="dl__row"><dt>Net return on equity (NROE)</dt><dd>{{nroe * 100 | number:2}}%</dd></div>
+            <div class="dl__row"><dt>Payout ratio</dt><dd>{{payoutRatio | number:4}}</dd></div>
+            <div class="dl__row"><dt>Payout ratio (%)</dt><dd>{{payoutRatioPercentage | number:2}}%</dd></div>
+            <div class="dl__row"><dt>Bond component</dt><dd>{{bondComponent | number:2}}</dd></div>
+            <div class="dl__row"><dt>Growth component</dt><dd>{{growthComponent | number:2}}</dd></div>
+            <div class="dl__row"><dt>Adjusted bond component</dt><dd>{{adjustedBondComponent | number:2}}</dd></div>
+            <div class="dl__row"><dt>Adjusted growth component</dt><dd>{{adjustedGrowthComponent | number:2}}</dd></div>
+            <div class="dl__row"><dt>Equity multiplier</dt><dd>{{equityMultiplier | number:2}}</dd></div>
+            <div class="dl__row"><dt>Equity per share</dt><dd>${{equityPerShare | number:2}}</dd></div>
+          </dl>
+        </div>
 
-    <footer>
-      <p class="text-center">&copy; Tom Saleeba 2017 <a href="https://twitter.com/techotom">@techotom</a></p>
-      <p class="text-center">View source code on <a href="https://github.com/tomsaleeba/stocks-ivc" target="_blank">GitHub</a></p>
+        <div class="panel result">
+          <div class="panel__head">
+            <span class="ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+            </span>
+            <h2>Result</h2>
+            <span class="sub">Valuation</span>
+          </div>
+
+          <div class="headline">
+            <div class="headline__label">Intrinsic Value · per share</div>
+            <div class="headline__value" ng-show="isInputValid()">${{intrinsicValue | number:2}}</div>
+            <div class="headline__value" ng-hide="isInputValid()">$-.--</div>
+          </div>
+
+          <div class="mos">
+            <div class="mos__card">
+              <span class="lbl">Current margin of safety</span>
+              <span class="val" ng-show="isInputValid()"
+                    ng-class="{'good-result': isCurrentMarginOfSafetyPositive, 'bad-result': !isCurrentMarginOfSafetyPositive}">
+                {{currentMarginOfSafety * 100 | number:2}}%
+              </span>
+              <span class="val" ng-hide="isInputValid()">--%</span>
+            </div>
+            <div class="mos__card">
+              <span class="lbl">Purchased margin of safety</span>
+              <span class="val" ng-show="isInputValid()"
+                    ng-class="{'good-result': isPurchasedMarginOfSafetyPositive, 'bad-result': !isPurchasedMarginOfSafetyPositive}">
+                {{purchasedMarginOfSafety * 100 | number:2}}%
+              </span>
+              <span class="val" ng-hide="isInputValid()">--%</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="foot">
+      <p>Method &amp; original calculator by <a href="https://twitter.com/techotom" target="_blank" rel="noopener">Tom Saleeba (@techotom)</a> · 2017 · GPL-3.0</p>
+      <p><a href="https://github.com/tomsaleeba/stocks-ivc" target="_blank" rel="noopener">View the original source on GitHub</a></p>
     </footer>
+
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
   <script src="app.js"></script>
-  <script>
-    (function (i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-      (i[r].q = i[r].q || []).push(arguments)
-    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-101335262-3', 'auto');
-    ga('send', 'pageview');
-  </script>
 </body>
 
 </html>
