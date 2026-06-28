@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28T12:42:35+00:00",
+  "generated_at": "2026-06-28T12:54:07+00:00",
   "count": 12,
   "results": [
     {
@@ -12,7 +12,20 @@
       "confidence": "low",
       "is_buy": true,
       "source": "yfinance",
-      "fetched_at": "2026-06-28T12:24:36+00:00"
+      "fetched_at": "2026-06-28T12:24:36+00:00",
+      "inputs": {
+        "annual_dividends": 1434.0,
+        "franking_percentage": 100.0,
+        "retained_earnings": 1568.0,
+        "change_in_reserves": 0.0,
+        "abnormals": 0.0,
+        "opening_equity": 17363.0,
+        "new_net_ordinary_equity": 17.0,
+        "required_return": 9.0,
+        "closing_equity": 19335.0000000001,
+        "outstanding_shares": 478911979.0,
+        "current_share_price": 114.87
+      }
     },
     {
       "code": "JBH",
@@ -24,7 +37,20 @@
       "confidence": "high",
       "is_buy": true,
       "source": "annual-report",
-      "fetched_at": "2026-06-28T12:37:40+00:00"
+      "fetched_at": "2026-06-28T12:37:40+00:00",
+      "inputs": {
+        "annual_dividends": 385.9,
+        "franking_percentage": 100.0,
+        "retained_earnings": 76.5,
+        "change_in_reserves": 0.0,
+        "abnormals": 0.0,
+        "opening_equity": 1559.1,
+        "new_net_ordinary_equity": 20.9,
+        "required_return": 9.0,
+        "closing_equity": 1616.6,
+        "outstanding_shares": 109333981.0,
+        "current_share_price": 81.84
+      }
     },
     {
       "code": "FMG",
@@ -36,7 +62,20 @@
       "confidence": "low",
       "is_buy": true,
       "source": "yfinance",
-      "fetched_at": "2026-06-28T12:24:45+00:00"
+      "fetched_at": "2026-06-28T12:24:45+00:00",
+      "inputs": {
+        "annual_dividends": 2851.0,
+        "franking_percentage": 100.0,
+        "retained_earnings": 522.0,
+        "change_in_reserves": 0.0,
+        "abnormals": 0.0,
+        "opening_equity": 19552.0,
+        "new_net_ordinary_equity": 163.0,
+        "required_return": 9.0,
+        "closing_equity": 19983.9999999999,
+        "outstanding_shares": 3078964919.0,
+        "current_share_price": 19.07
+      }
     },
     {
       "code": "SUN",
@@ -48,7 +87,20 @@
       "confidence": "high",
       "is_buy": true,
       "source": "annual-report",
-      "fetched_at": "2026-06-28T12:37:40+00:00"
+      "fetched_at": "2026-06-28T12:37:40+00:00",
+      "inputs": {
+        "annual_dividends": 1362.0,
+        "franking_percentage": 100.0,
+        "retained_earnings": 461.0,
+        "change_in_reserves": 0.0,
+        "abnormals": 0.0,
+        "opening_equity": 13844.0,
+        "new_net_ordinary_equity": 3817.0,
+        "required_return": 9.0,
+        "closing_equity": 10576.0,
+        "outstanding_shares": 1060051406.0,
+        "current_share_price": 18.94
+      }
     },
     {
       "code": "WBC",
@@ -60,7 +112,20 @@
       "confidence": "low",
       "is_buy": false,
       "source": "yfinance",
-      "fetched_at": "2026-06-28T12:24:39+00:00"
+      "fetched_at": "2026-06-28T12:24:39+00:00",
+      "inputs": {
+        "annual_dividends": 5652.0,
+        "franking_percentage": 100.0,
+        "retained_earnings": 1338.0,
+        "change_in_reserves": 0.0,
+        "abnormals": 0.0,
+        "opening_equity": 72495.0,
+        "new_net_ordinary_equity": 1868.0,
+        "required_return": 9.0,
+        "closing_equity": 71705.0,
+        "outstanding_shares": 3414907347.0,
+        "current_share_price": 35.14
+      }
     },
     {
       "code": "RIO",
@@ -72,7 +137,20 @@
       "confidence": "high",
       "is_buy": false,
       "source": "annual-report",
-      "fetched_at": "2026-06-28T12:37:40+00:00"
+      "fetched_at": "2026-06-28T12:37:40+00:00",
+      "inputs": {
+        "annual_dividends": 6145.0,
+        "franking_percentage": 100.0,
+        "retained_earnings": 3821.0,
+        "change_in_reserves": 0.0,
+        "abnormals": 0.0,
+        "opening_equity": 55246.0,
+        "new_net_ordinary_equity": 0.0,
+        "required_return": 9.0,
+        "closing_equity": 62203.0,
+        "outstanding_shares": 1626213793.0,
+        "current_share_price": 173.64
+      }
     },
     {
       "code": "MQG",
@@ -84,7 +162,20 @@
       "confidence": "high",
       "is_buy": false,
       "source": "annual-report",
-      "fetched_at": "2026-06-28T12:37:41+00:00"
+      "fetched_at": "2026-06-28T12:37:41+00:00",
+      "inputs": {
+        "annual_dividends": 2350.0,
+        "franking_percentage": 35.0,
+        "retained_earnings": 2497.0,
+        "change_in_reserves": 0.0,
+        "abnormals": 0.0,
+        "opening_equity": 35356.0,
+        "new_net_ordinary_equity": 881.0,
+        "required_return": 9.0,
+        "closing_equity": 36068.0,
+        "outstanding_shares": 381138415.0,
+        "current_share_price": 249.36
+      }
     },
     {
       "code": "COL",
@@ -96,7 +187,20 @@
       "confidence": "high",
       "is_buy": false,
       "source": "annual-report",
-      "fetched_at": "2026-06-28T12:37:40+00:00"
+      "fetched_at": "2026-06-28T12:37:40+00:00",
+      "inputs": {
+        "annual_dividends": 889.0,
+        "franking_percentage": 100.0,
+        "retained_earnings": 190.0,
+        "change_in_reserves": 0.0,
+        "abnormals": 0.0,
+        "opening_equity": 3617.0,
+        "new_net_ordinary_equity": 42.0,
+        "required_return": 9.0,
+        "closing_equity": 3806.0,
+        "outstanding_shares": 1343143461.0,
+        "current_share_price": 24.41
+      }
     },
     {
       "code": "WES",
@@ -108,7 +212,20 @@
       "confidence": "low",
       "is_buy": false,
       "source": "yfinance",
-      "fetched_at": "2026-06-28T12:24:38+00:00"
+      "fetched_at": "2026-06-28T12:24:38+00:00",
+      "inputs": {
+        "annual_dividends": 2291.0,
+        "franking_percentage": 100.0,
+        "retained_earnings": 635.0,
+        "change_in_reserves": 0.0,
+        "abnormals": 0.0,
+        "opening_equity": 8585.0,
+        "new_net_ordinary_equity": 0.0,
+        "required_return": 9.0,
+        "closing_equity": 9189.0,
+        "outstanding_shares": 1135282728.0,
+        "current_share_price": 90.74
+      }
     },
     {
       "code": "BHP",
@@ -120,7 +237,20 @@
       "confidence": "low",
       "is_buy": false,
       "source": "yfinance",
-      "fetched_at": "2026-06-28T12:24:34+00:00"
+      "fetched_at": "2026-06-28T12:24:34+00:00",
+      "inputs": {
+        "annual_dividends": 6403.0,
+        "franking_percentage": 100.0,
+        "retained_earnings": 2616.0,
+        "change_in_reserves": 0.0,
+        "abnormals": 0.0,
+        "opening_equity": 43374.0,
+        "new_net_ordinary_equity": 0.0,
+        "required_return": 9.0,
+        "closing_equity": 46228.0,
+        "outstanding_shares": 5080690184.0,
+        "current_share_price": 58.99
+      }
     },
     {
       "code": "CBA",
@@ -132,7 +262,20 @@
       "confidence": "high",
       "is_buy": false,
       "source": "annual-report",
-      "fetched_at": "2026-06-28T12:34:48+00:00"
+      "fetched_at": "2026-06-28T12:34:48+00:00",
+      "inputs": {
+        "annual_dividends": 7949.0,
+        "franking_percentage": 70.0,
+        "retained_earnings": 2167.0,
+        "change_in_reserves": 0.0,
+        "abnormals": 0.0,
+        "opening_equity": 73088.0,
+        "new_net_ordinary_equity": 154.0,
+        "required_return": 9.0,
+        "closing_equity": 78776.0,
+        "outstanding_shares": 1672123722.0,
+        "current_share_price": 162.02
+      }
     },
     {
       "code": "TLS",
@@ -144,7 +287,20 @@
       "confidence": "low",
       "is_buy": false,
       "source": "yfinance",
-      "fetched_at": "2026-06-28T12:24:44+00:00"
+      "fetched_at": "2026-06-28T12:24:44+00:00",
+      "inputs": {
+        "annual_dividends": 2317.0,
+        "franking_percentage": 100.0,
+        "retained_earnings": -145.0,
+        "change_in_reserves": 0.0,
+        "abnormals": 0.0,
+        "opening_equity": 14922.0,
+        "new_net_ordinary_equity": 769.0,
+        "required_return": 9.0,
+        "closing_equity": 13899.0,
+        "outstanding_shares": 11139136247.0,
+        "current_share_price": 5.15
+      }
     }
   ]
 }

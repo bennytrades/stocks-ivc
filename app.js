@@ -162,6 +162,31 @@ app.controller('TheController', function ($scope) {
   }
   $scope.doCalc = doCalc
   $scope.doCalc()
+
+  // Allow the (vanilla-JS) screener to load a stock's figures into the calculator.
+  // Maps the exported snake_case input fields onto the scope, then recalculates
+  // inside an Angular digest. purchasedPrice isn't part of the scan, so we seed it
+  // with the current price (margin of safety vs "if I bought today").
+  window.ivcLoadStock = function (data) {
+    if (!data || !data.inputs) { return }
+    var i = data.inputs
+    $scope.$applyAsync(function () {
+      $scope.annualDividends = num(i.annual_dividends)
+      $scope.frankingPercentage = num(i.franking_percentage)
+      $scope.retainedEarnings = num(i.retained_earnings)
+      $scope.changeInReserves = num(i.change_in_reserves)
+      $scope.abnormals = num(i.abnormals)
+      $scope.openingEquity = num(i.opening_equity)
+      $scope.newNetOrdinaryEquity = num(i.new_net_ordinary_equity)
+      $scope.requiredReturn = num(i.required_return)
+      $scope.closingEquity = num(i.closing_equity)
+      $scope.outstandingShares = num(i.outstanding_shares)
+      $scope.currentSharePrice = num(i.current_share_price)
+      $scope.purchasedPrice = num(i.current_share_price)
+      $scope.doCalc()
+    })
+  }
+  function num (v) { return v === null || v === undefined ? v : Number(v) }
 })
 
 app.directive('ivcInput', function () {
