@@ -45,7 +45,7 @@
       .then(render)
       .catch(function (err) {
         body.innerHTML =
-          '<tr><td colspan="5" class="screener__empty">Couldn\'t load screener data (' +
+          '<tr><td colspan="7" class="screener__empty">Couldn\'t load screener data (' +
           String(err.message) + '). Re-run the scanner\'s <code>export</code>.</td></tr>';
       });
   }
@@ -62,7 +62,7 @@
     }
 
     if (!rows.length) {
-      body.innerHTML = '<tr><td colspan="5" class="screener__empty">No valued stocks yet.</td></tr>';
+      body.innerHTML = '<tr><td colspan="7" class="screener__empty">No valued stocks yet.</td></tr>';
       return;
     }
 
@@ -78,6 +78,8 @@
       return '<tr class="srow ' + (r.is_buy ? 'is-buy' : '') + '" data-code="' + r.code +
         '" tabindex="0" role="button" title="Load ' + r.code + ' into the calculator">' +
         '<td class="screener__code">' + r.code + '</td>' +
+        '<td class="num">' + fmtMoney(r.price) + '</td>' +
+        '<td class="num">' + fmtMoney(r.intrinsic) + '</td>' +
         '<td class="num ' + marginCls + '">' + fmtPct(r.margin) + '</td>' +
         '<td class="age ' + age.cls + '" title="' + age.title + '">' + age.text + '</td>' +
         '<td><span class="conf-badge ' + confCls + '">' + (r.confidence || '').toUpperCase() + '</span></td>' +
