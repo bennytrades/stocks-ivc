@@ -1,0 +1,150 @@
+{
+  "generated_at": "2026-06-28T12:42:35+00:00",
+  "count": 12,
+  "results": [
+    {
+      "code": "CSL",
+      "name": "CSL LIMITED",
+      "industry": "Pharmaceuticals, Biotechnology & Life Sciences",
+      "price": 114.87,
+      "intrinsic": 146.56,
+      "margin": 0.2162,
+      "confidence": "low",
+      "is_buy": true,
+      "source": "yfinance",
+      "fetched_at": "2026-06-28T12:24:36+00:00"
+    },
+    {
+      "code": "JBH",
+      "name": "JB HI-FI LIMITED",
+      "industry": "Consumer Discretionary Distribution & Retail",
+      "price": 81.84,
+      "intrinsic": 93.29,
+      "margin": 0.1227,
+      "confidence": "high",
+      "is_buy": true,
+      "source": "annual-report",
+      "fetched_at": "2026-06-28T12:37:40+00:00"
+    },
+    {
+      "code": "FMG",
+      "name": "FORTESCUE LTD",
+      "industry": "Materials",
+      "price": 19.07,
+      "intrinsic": 19.95,
+      "margin": 0.0439,
+      "confidence": "low",
+      "is_buy": true,
+      "source": "yfinance",
+      "fetched_at": "2026-06-28T12:24:45+00:00"
+    },
+    {
+      "code": "SUN",
+      "name": "SUNCORP GROUP LIMITED",
+      "industry": "Insurance",
+      "price": 18.94,
+      "intrinsic": 19.2,
+      "margin": 0.0135,
+      "confidence": "high",
+      "is_buy": true,
+      "source": "annual-report",
+      "fetched_at": "2026-06-28T12:37:40+00:00"
+    },
+    {
+      "code": "WBC",
+      "name": "WESTPAC BANKING CORPORATION",
+      "industry": "Banks",
+      "price": 35.14,
+      "intrinsic": 31.71,
+      "margin": -0.1082,
+      "confidence": "low",
+      "is_buy": false,
+      "source": "yfinance",
+      "fetched_at": "2026-06-28T12:24:39+00:00"
+    },
+    {
+      "code": "RIO",
+      "name": "RIO TINTO LIMITED",
+      "industry": "Materials",
+      "price": 173.64,
+      "intrinsic": 142.02,
+      "margin": -0.2226,
+      "confidence": "high",
+      "is_buy": false,
+      "source": "annual-report",
+      "fetched_at": "2026-06-28T12:37:40+00:00"
+    },
+    {
+      "code": "MQG",
+      "name": "MACQUARIE GROUP LIMITED",
+      "industry": "Financial Services",
+      "price": 249.36,
+      "intrinsic": 193.75,
+      "margin": -0.287,
+      "confidence": "high",
+      "is_buy": false,
+      "source": "annual-report",
+      "fetched_at": "2026-06-28T12:37:41+00:00"
+    },
+    {
+      "code": "COL",
+      "name": "COLES GROUP LIMITED.",
+      "industry": "Consumer Staples Distribution & Retail",
+      "price": 24.41,
+      "intrinsic": 18.32,
+      "margin": -0.3322,
+      "confidence": "high",
+      "is_buy": false,
+      "source": "annual-report",
+      "fetched_at": "2026-06-28T12:37:40+00:00"
+    },
+    {
+      "code": "WES",
+      "name": "WESFARMERS LIMITED",
+      "industry": "Consumer Discretionary Distribution & Retail",
+      "price": 90.74,
+      "intrinsic": 67.93,
+      "margin": -0.3358,
+      "confidence": "low",
+      "is_buy": false,
+      "source": "yfinance",
+      "fetched_at": "2026-06-28T12:24:38+00:00"
+    },
+    {
+      "code": "BHP",
+      "name": "BHP GROUP LIMITED",
+      "industry": "Materials",
+      "price": 58.99,
+      "intrinsic": 39.69,
+      "margin": -0.4861,
+      "confidence": "low",
+      "is_buy": false,
+      "source": "yfinance",
+      "fetched_at": "2026-06-28T12:24:34+00:00"
+    },
+    {
+      "code": "CBA",
+      "name": "COMMONWEALTH BANK OF AUSTRALIA.",
+      "industry": "Banks",
+      "price": 162.02,
+      "intrinsic": 100.78,
+      "margin": -0.6076,
+      "confidence": "high",
+      "is_buy": false,
+      "source": "annual-report",
+      "fetched_at": "2026-06-28T12:34:48+00:00"
+    },
+    {
+      "code": "TLS",
+      "name": "TELSTRA GROUP LIMITED",
+      "industry": "Telecommunication Services",
+      "price": 5.15,
+      "intrinsic": 2.7,
+      "margin": -0.91,
+      "confidence": "low",
+      "is_buy": false,
+      "source": "yfinance",
+      "fetched_at": "2026-06-28T12:24:44+00:00"
+    }
+  ]
+}

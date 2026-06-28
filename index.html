@@ -62,8 +62,20 @@
       <p class="disclaimer">// Disclaimer: this calculator has no brain. You need to use yours.</p>
     </header>
 
-    <!-- App -->
-    <main class="grid" ng-controller="TheController">
+    <!-- View toggle -->
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <button class="tab is-active" data-view="calculator" role="tab" aria-selected="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="10" y2="14"></line><line x1="8" y1="18" x2="10" y2="18"></line></svg>
+        Calculator
+      </button>
+      <button class="tab" data-view="screener" role="tab" aria-selected="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+        Screener
+      </button>
+    </nav>
+
+    <!-- View: Calculator -->
+    <main class="grid view view--calculator" data-view="calculator" ng-controller="TheController">
 
       <!-- Inputs -->
       <section>
@@ -155,6 +167,47 @@
 
     </main>
 
+    <!-- View: Screener -->
+    <section class="view view--screener" data-view="screener" hidden>
+      <div class="panel">
+        <div class="panel__head">
+          <span class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><rect x="7" y="11" width="3" height="6"></rect><rect x="12" y="7" width="3" height="10"></rect><rect x="17" y="13" width="3" height="4"></rect></svg>
+          </span>
+          <h2>ASX Value Screener</h2>
+          <span class="sub" id="screener-meta">loading…</span>
+        </div>
+
+        <p class="screener__intro">
+          Stocks ranked by margin of safety. A <strong class="up">BUY</strong> means the current price
+          sits below the calculated intrinsic value. <span class="conf-badge conf-badge--low">LOW</span>
+          confidence = franking/abnormals/reserves were defaulted (verify before trading);
+          <span class="conf-badge conf-badge--high">HIGH</span> = figures verified from the annual report.
+        </p>
+
+        <div class="screener__scroll">
+          <table class="screener" id="screener-table">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th class="screener__name">Company</th>
+                <th class="num">Price</th>
+                <th class="num">Intrinsic</th>
+                <th class="num">Margin</th>
+                <th>Conf.</th>
+                <th>Signal</th>
+              </tr>
+            </thead>
+            <tbody id="screener-body">
+              <tr><td colspan="7" class="screener__empty">Loading screener data…</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="screener__note" id="screener-note"></p>
+      </div>
+    </section>
+
     <footer class="foot">
       <p>Method &amp; original calculator by <a href="https://twitter.com/techotom" target="_blank" rel="noopener">Tom Saleeba (@techotom)</a> · 2017 · GPL-3.0</p>
       <p><a href="https://github.com/tomsaleeba/stocks-ivc" target="_blank" rel="noopener">View the original source on GitHub</a></p>
@@ -164,6 +217,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
   <script src="app.js"></script>
+  <script src="screener.js"></script>
 </body>
 
 </html>
