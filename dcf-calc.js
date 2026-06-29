@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  var IDS = ['dcf-fcf', 'dcf-growth', 'dcf-discount', 'dcf-terminal', 'dcf-years', 'dcf-shares', 'dcf-price'];
+  var IDS = ['dcf-fcf', 'dcf-growth', 'dcf-discount', 'dcf-terminal', 'dcf-years', 'dcf-shares', 'dcf-price', 'dcf-eps', 'dcf-fairpe'];
 
   function $(id) { return document.getElementById(id); }
   function num(id) { var v = parseFloat(($(id) || {}).value); return isNaN(v) ? null : v; }
@@ -29,38 +29,51 @@
     var years = num('dcf-years');
     var shares = num('dcf-shares');
     var price = num('dcf-price');
+    var eps = num('dcf-eps');
+    var fairpe = num('dcf-fairpe');
 
-    var ok = fcfM != null && fcfM > 0 && shares > 0 && price > 0 && years >= 1 &&
-             r != null && gt != null && (r / 100) > (gt / 100);
+    var dcfOk = fcfM != null && fcfM > 0 && shares > 0 && years >= 1 &&
+                r != null && gt != null && (r / 100) > (gt / 100);
 
-    if (!ok) {
-      $('dcf-intrinsic').textContent = '$-.--';
-      setVal('dcf-mos', '--%', '');
-      setVal('dcf-verdict', '—', '');
-      ['dcf-pv1', 'dcf-tv', 'dcf-pvt', 'dcf-equity'].forEach(function (id) { $(id).textContent = '—'; });
-      return;
+    var dcfValue = null, pv1 = null, tv = null, pvt = null, equity = null;
+    if (dcfOk) {
+      var fcf0 = fcfM * 1e6;
+      var rr = r / 100, gg = g1 / 100, gtt = gt / 100;
+      var n = Math.round(years);
+      pv1 = 0; var fcf = fcf0;
+      for (var t = 1; t <= n; t++) { fcf *= (1 + gg); pv1 += fcf / Math.pow(1 + rr, t); }
+      tv = fcf * (1 + gtt) / (rr - gtt);
+      pvt = tv / Math.pow(1 + rr, n);
+      equity = pv1 + pvt;
+      dcfValue = equity / shares;
     }
 
-    var fcf0 = fcfM * 1e6;
-    var rr = r / 100, gg = g1 / 100, gtt = gt / 100;
-    var n = Math.round(years);
+    // Relative value = EPS x fair P/E (only when both positive)
+    var relValue = (eps != null && eps > 0 && fairpe != null && fairpe > 0) ? eps * fairpe : null;
 
-    var pv1 = 0, fcf = fcf0;
-    for (var t = 1; t <= n; t++) { fcf *= (1 + gg); pv1 += fcf / Math.pow(1 + rr, t); }
-    var tv = fcf * (1 + gtt) / (rr - gtt);
-    var pvt = tv / Math.pow(1 + rr, n);
-    var equity = pv1 + pvt;
-    var intrinsic = equity / shares;
-    var mos = (intrinsic - price) / intrinsic;
-    var buy = intrinsic > 0 && price < intrinsic;
+    // Intrinsic = average of the available methods (AlphaSpread-style blend)
+    var parts = [dcfValue, relValue].filter(function (v) { return v != null && v > 0; });
+    var intrinsic = parts.length ? parts.reduce(function (a, b) { return a + b; }, 0) / parts.length : null;
 
-    $('dcf-intrinsic').textContent = fmtMoney(intrinsic);
-    setVal('dcf-mos', (mos * 100).toFixed(1) + '%', mos >= 0 ? 'good-result' : 'bad-result');
-    setVal('dcf-verdict', buy ? 'BUY' : 'hold', buy ? 'good-result' : 'bad-result');
     $('dcf-pv1').textContent = fmtBig(pv1);
     $('dcf-tv').textContent = fmtBig(tv);
     $('dcf-pvt').textContent = fmtBig(pvt);
     $('dcf-equity').textContent = fmtBig(equity);
+    $('dcf-dcfval').textContent = dcfValue == null ? '—' : fmtMoney(dcfValue);
+    $('dcf-relval').textContent = relValue == null ? '—' : fmtMoney(relValue);
+    $('dcf-blend').textContent = intrinsic == null ? '—' : fmtMoney(intrinsic);
+
+    if (intrinsic == null || !(price > 0)) {
+      $('dcf-intrinsic').textContent = '$-.--';
+      setVal('dcf-mos', '--%', '');
+      setVal('dcf-verdict', '—', '');
+      return;
+    }
+    var mos = (intrinsic - price) / intrinsic;
+    var buy = intrinsic > 0 && price < intrinsic;
+    $('dcf-intrinsic').textContent = fmtMoney(intrinsic);
+    setVal('dcf-mos', (mos * 100).toFixed(1) + '%', mos >= 0 ? 'good-result' : 'bad-result');
+    setVal('dcf-verdict', buy ? 'BUY' : 'hold', buy ? 'good-result' : 'bad-result');
   }
 
   function setVal(id, text, cls) {
@@ -82,6 +95,8 @@
     set('dcf-years', d.years);
     set('dcf-shares', ins.outstanding_shares != null ? ins.outstanding_shares : '');
     set('dcf-price', data.price != null ? data.price : ins.current_share_price);
+    set('dcf-eps', d.eps);
+    set('dcf-fairpe', d.fair_pe);
     var code = $('dcf-code'); if (code) code.textContent = data.code || 'DCF';
     var name = $('dcf-name');
     if (name) name.textContent = (data.name || '') + (data.industry ? ' · ' + data.industry : '');

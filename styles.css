@@ -456,6 +456,16 @@ a:hover { color: #7dd3fc; }
   align-items: start;
 }
 .calc-host { min-width: 0; }
+.field__sep {
+  margin: 18px 0 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--fg-dim);
+}
 .calc__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

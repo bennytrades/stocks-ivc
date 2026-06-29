@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link rel="stylesheet" href="styles.css?v=7">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 
@@ -244,6 +244,24 @@
                   <input type="number" id="dcf-price" step="any" inputmode="decimal">
                 </div>
               </div>
+
+              <div class="field__sep">Relative valuation (blended in)</div>
+              <div class="field">
+                <label class="field__label" for="dcf-eps">Earnings per share (TTM)</label>
+                <div class="field__group">
+                  <span class="field__addon field__addon--prefix">$</span>
+                  <input type="number" id="dcf-eps" step="any" inputmode="decimal">
+                </div>
+                <span class="field__tip">Used for the relative (P/E) value. Leave blank / 0 for loss-makers → DCF only.</span>
+              </div>
+              <div class="field">
+                <label class="field__label" for="dcf-fairpe">Fair P/E</label>
+                <div class="field__group">
+                  <input type="number" id="dcf-fairpe" step="any" inputmode="decimal">
+                  <span class="field__addon field__addon--suffix">×</span>
+                </div>
+                <span class="field__tip">The multiple you'd pay. Relative value = EPS × this. Final = average of DCF &amp; relative.</span>
+              </div>
             </form>
           </div>
 
@@ -286,6 +304,9 @@
                 <div class="dl__row"><dt>Terminal value (year N)</dt><dd id="dcf-tv">—</dd></div>
                 <div class="dl__row"><dt>PV of terminal value</dt><dd id="dcf-pvt">—</dd></div>
                 <div class="dl__row"><dt>Equity value</dt><dd id="dcf-equity">—</dd></div>
+                <div class="dl__row"><dt>DCF value · per share</dt><dd id="dcf-dcfval">—</dd></div>
+                <div class="dl__row"><dt>Relative value (P/E) · per share</dt><dd id="dcf-relval">—</dd></div>
+                <div class="dl__row"><dt><strong>Intrinsic = avg of the two</strong></dt><dd id="dcf-blend">—</dd></div>
               </dl>
             </div>
           </div>
@@ -350,9 +371,9 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
-  <script src="app.js?v=6"></script>
-  <script src="dcf-calc.js?v=6"></script>
-  <script src="screener.js?v=6"></script>
+  <script src="app.js?v=7"></script>
+  <script src="dcf-calc.js?v=7"></script>
+  <script src="screener.js?v=7"></script>
 </body>
 
 </html>
