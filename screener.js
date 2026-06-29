@@ -7,8 +7,8 @@
   var rowsByCode = {};
   var currentMarket = 'au';
   var MARKET = {
-    au: { file: 'screener-data-au.json', title: 'ASX Value Screener' },
-    us: { file: 'screener-data-us.json', title: 'S&P 500 Value Screener' }
+    au: { file: 'screener-data-au.json', title: 'ASX Value Screener', method: 'clime' },
+    us: { file: 'screener-data-us.json', title: 'S&P 500 Value Screener', method: 'dcf' }
   };
 
   function fmtMoney(v) {
@@ -55,7 +55,16 @@
     });
     var title = document.getElementById('screener-title');
     if (title) title.textContent = MARKET[mkt].title;
+    showCalculatorFor(mkt);
     loadScreener();
+  }
+
+  // Show the calculator that matches the market's method (Clime for AU, DCF for US).
+  function showCalculatorFor(mkt) {
+    var method = MARKET[mkt].method;
+    document.querySelectorAll('.calc-host .calc').forEach(function (c) {
+      c.hidden = c.getAttribute('data-method') !== method;
+    });
   }
 
   function loadScreener() {
@@ -150,9 +159,11 @@
       hint.textContent = (stock.confidence === 'high' ? 'Verified figures' : 'Auto-fetched · verify before trading');
     }
 
-    // push the figures into the Angular calculator
-    if (typeof window.ivcLoadStock === 'function') {
-      window.ivcLoadStock(stock);
+    // push the figures into the matching calculator (Clime for AU, DCF for US)
+    if (MARKET[currentMarket].method === 'dcf') {
+      if (typeof window.dcfLoadStock === 'function') window.dcfLoadStock(stock);
+    } else {
+      if (typeof window.ivcLoadStock === 'function') window.ivcLoadStock(stock);
     }
 
     // on small screens the calculator is above the list — bring it into view

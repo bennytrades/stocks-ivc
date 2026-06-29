@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=6">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 
@@ -65,8 +65,10 @@
     <!-- Workspace: calculator (left) + screener (right) -->
     <main class="workspace">
 
-      <!-- Calculator -->
-      <section class="calc" ng-controller="TheController">
+      <div class="calc-host">
+
+      <!-- Calculator: Clime / dividends (AU) -->
+      <section class="calc calc--clime" data-method="clime" ng-controller="TheController">
 
         <div class="loaded" id="loaded-banner">
           <div class="loaded__id">
@@ -165,7 +167,133 @@
           </div>
         </div>
       </section>
-      <!-- /calculator -->
+      <!-- /clime calculator -->
+
+      <!-- Calculator: DCF / cash flow (US) -->
+      <section class="calc calc--dcf" data-method="dcf" hidden>
+        <div class="loaded">
+          <div class="loaded__id">
+            <span class="loaded__code" id="dcf-code">DCF</span>
+            <span class="loaded__name" id="dcf-name">Click a US stock to load its cash-flow model</span>
+          </div>
+          <span class="loaded__hint">Cash-flow valuation · editable</span>
+        </div>
+
+        <div class="calc__grid">
+          <!-- DCF inputs -->
+          <div class="panel">
+            <div class="panel__head">
+              <span class="ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 15l3-4 3 2 5-7"></path></svg>
+              </span>
+              <h2>DCF Assumptions</h2>
+              <span class="sub">Editable</span>
+            </div>
+            <form novalidate>
+              <div class="field">
+                <label class="field__label" for="dcf-fcf">Free cash flow</label>
+                <div class="field__group">
+                  <span class="field__addon field__addon--prefix">$</span>
+                  <input type="number" id="dcf-fcf" step="any" inputmode="decimal">
+                  <span class="field__addon field__addon--suffix">million</span>
+                </div>
+                <span class="field__tip">Latest free cash flow (operating cash flow − capex), 3-yr avg.</span>
+              </div>
+              <div class="field">
+                <label class="field__label" for="dcf-growth">Growth rate · years 1–N</label>
+                <div class="field__group">
+                  <input type="number" id="dcf-growth" step="any" inputmode="decimal">
+                  <span class="field__addon field__addon--suffix">%</span>
+                </div>
+                <span class="field__tip">Annual FCF growth for the forecast period. Seeded from past revenue growth — change it to your own view.</span>
+              </div>
+              <div class="field">
+                <label class="field__label" for="dcf-discount">Discount rate</label>
+                <div class="field__group">
+                  <input type="number" id="dcf-discount" step="any" inputmode="decimal">
+                  <span class="field__addon field__addon--suffix">%</span>
+                </div>
+                <span class="field__tip">Your required annual return. Higher = more conservative.</span>
+              </div>
+              <div class="field">
+                <label class="field__label" for="dcf-terminal">Terminal growth</label>
+                <div class="field__group">
+                  <input type="number" id="dcf-terminal" step="any" inputmode="decimal">
+                  <span class="field__addon field__addon--suffix">%</span>
+                </div>
+                <span class="field__tip">Perpetual growth after the forecast period (must be below the discount rate).</span>
+              </div>
+              <div class="field">
+                <label class="field__label" for="dcf-years">Forecast years</label>
+                <div class="field__group">
+                  <input type="number" id="dcf-years" step="1" inputmode="numeric">
+                  <span class="field__addon field__addon--suffix">years</span>
+                </div>
+              </div>
+              <div class="field">
+                <label class="field__label" for="dcf-shares">Shares outstanding</label>
+                <div class="field__group">
+                  <input type="number" id="dcf-shares" step="any" inputmode="decimal">
+                  <span class="field__addon field__addon--suffix">shares</span>
+                </div>
+              </div>
+              <div class="field">
+                <label class="field__label" for="dcf-price">Current share price</label>
+                <div class="field__group">
+                  <span class="field__addon field__addon--prefix">$</span>
+                  <input type="number" id="dcf-price" step="any" inputmode="decimal">
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- DCF result + working -->
+          <div class="calc__col">
+            <div class="panel result">
+              <div class="panel__head">
+                <span class="ico">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                </span>
+                <h2>Result</h2>
+                <span class="sub">DCF</span>
+              </div>
+              <div class="headline">
+                <div class="headline__label">Intrinsic Value · per share</div>
+                <div class="headline__value" id="dcf-intrinsic">$-.--</div>
+              </div>
+              <div class="mos">
+                <div class="mos__card">
+                  <span class="lbl">Margin of safety</span>
+                  <span class="val" id="dcf-mos">--%</span>
+                </div>
+                <div class="mos__card">
+                  <span class="lbl">Verdict</span>
+                  <span class="val" id="dcf-verdict">—</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head">
+                <span class="ico">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 15l3-4 3 2 5-7"></path></svg>
+                </span>
+                <h2>Working</h2>
+                <span class="sub">Live</span>
+              </div>
+              <dl class="dl">
+                <div class="dl__row"><dt>PV of forecast cash flows</dt><dd id="dcf-pv1">—</dd></div>
+                <div class="dl__row"><dt>Terminal value (year N)</dt><dd id="dcf-tv">—</dd></div>
+                <div class="dl__row"><dt>PV of terminal value</dt><dd id="dcf-pvt">—</dd></div>
+                <div class="dl__row"><dt>Equity value</dt><dd id="dcf-equity">—</dd></div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /dcf calculator -->
+
+      </div><!-- /calc-host -->
 
       <!-- Screener -->
       <aside class="screener-aside">
@@ -222,8 +350,9 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
-  <script src="app.js?v=5"></script>
-  <script src="screener.js?v=5"></script>
+  <script src="app.js?v=6"></script>
+  <script src="dcf-calc.js?v=6"></script>
+  <script src="screener.js?v=6"></script>
 </body>
 
 </html>

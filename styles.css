@@ -455,6 +455,7 @@ a:hover { color: #7dd3fc; }
   gap: 22px;
   align-items: start;
 }
+.calc-host { min-width: 0; }
 .calc__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
